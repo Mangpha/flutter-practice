@@ -11,13 +11,42 @@ class App extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Flutter Basic"),
-        ),
-        body: Center(
-          child: Text("First iOS App"),
-        ),
-      ),
+          backgroundColor: Color(0xFF181818),
+          body: Padding(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Hey, Mangpha",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          "Welcome back",
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.8),
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+          )),
     );
   }
 }
