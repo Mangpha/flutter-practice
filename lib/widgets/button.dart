@@ -21,8 +21,8 @@ class Button extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 50,
+          vertical: 25,
+          horizontal: 55,
         ),
         child: Text(
           text,
