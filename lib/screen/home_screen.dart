@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const targetMinutes = 1500;
+  static const targetMinutes = 5;
   int totalSeconds = targetMinutes;
   bool isRunning = false;
   int totalPomodoros = 0;
@@ -40,6 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
     isRunning = false;
   }
 
+  void onStopPressed() {
+    setState(() {});
+    timer.cancel();
+    isRunning = false;
+    totalSeconds = targetMinutes;
+  }
+
+  void onResetPressed() {
+    setState(() {});
+    totalPomodoros = 0;
+  }
+
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     return duration.toString().split('.').first.substring(2, 7);
@@ -52,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Container(
               alignment: Alignment.bottomCenter,
               child: Text(
@@ -66,20 +78,31 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Flexible(
-            flex: 3,
+            flex: 5,
             child: Center(
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                icon: Icon(isRunning
-                    ? Icons.pause_circle_outline
-                    : Icons.play_circle_outline),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    onPressed: isRunning ? onPausePressed : onStartPressed,
+                    icon: Icon(isRunning
+                        ? Icons.pause_circle_outline
+                        : Icons.play_circle_outline),
+                  ),
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    onPressed: onStopPressed,
+                    icon: const Icon(Icons.stop_circle_outlined),
+                  )
+                ],
               ),
             ),
           ),
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Row(
               children: [
                 Expanded(
@@ -91,6 +114,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: IconButton(
+                                iconSize: 35,
+                                onPressed: onResetPressed,
+                                icon: const Icon(Icons.restart_alt_outlined),
+                              ),
+                            ),
+                          ],
+                        ),
                         Text(
                           'Pomodoros',
                           style: TextStyle(
